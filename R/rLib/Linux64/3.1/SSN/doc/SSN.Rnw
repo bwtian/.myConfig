@@ -1,5 +1,0 @@
-%\VignetteIndexEntry{Model Introduction and SSN User Manual}
-\documentclass{article}
-\begin{document}
-Stangle()
-\end{document}

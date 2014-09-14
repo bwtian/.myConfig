@@ -1,7 +1,0 @@
-## Functions
-export(georef, lssub, geoshift, movingwindow, ESdist, ddate)
-export(radiocorr, DOS, RCS, PIF, histmatch, relnorm)
-export(BSL, tasscap, clouds, thermalband)
-export(slopeasp, topocorr, minnaert)
-## dependencies 
-import(lmodel2, mgcv)

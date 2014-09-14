@@ -1,4 +1,0 @@
-useDynLib(rlecuyer)
-
-# Export all names
-exportPattern(".")

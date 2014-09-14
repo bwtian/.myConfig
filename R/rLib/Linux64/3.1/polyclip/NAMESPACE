@@ -1,2 +1,0 @@
-export(polyclip,polyoffset,polylineoffset)
-useDynLib(polyclip,"Cclipbool","Cpolyoffset","Clineoffset")

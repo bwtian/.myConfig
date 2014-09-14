@@ -1,7 +1,0 @@
-export( dtrunc,
-        extrunc,
-        vartrunc,
-        ptrunc,
-        qqtrunc,
-        qtrunc,
-        rtrunc )

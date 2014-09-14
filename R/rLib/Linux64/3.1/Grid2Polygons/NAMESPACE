@@ -1,2 +1,0 @@
-useDynLib(Grid2Polygons)
-export(Grid2Polygons)

@@ -1,8 +1,0 @@
-#Set up our dynamic library
-useDynLib("network")
-
-#Import some required symbols
-import(utils)
-
-#Export everything, 'cuz that's how we roll
-exportPattern("^[^\\.]") 
