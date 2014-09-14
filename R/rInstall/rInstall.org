@@ -1,0 +1,124 @@
+# -*- mode: org; org-export-babel-evaluate: nil -*- 
+#+TITLE: Installation of R
+#+AUTHOR: Bingwei TIAN
+#+EMAIL: bwtian@gmail.com
+#+DATE:  
+#+OPTIONS: H:4 toc:2 num:2 
+#+STARTUP: align fold nodlcheck hidestars oddeven lognotestate inlineimages 
+#+LICENSE: All Right Reserved Before [2015-12-31 Thu], After that GPLv3 
+#+CREATED:  [2014-06-25 Wed 13:43]
+#+LASTEDIT:  
+#+CATEGORIES: Org-babel, R and R function file 
+#+PROPERTY:   header-args  session *R* 
+#+PROPERTY:   exports both  
+#+PROPERTY:   cache yes 
+#+PROPERTY:   tangle yes 
+#+DEPENDENCY: 
+
+* Update R source to get the latest version
+#+BEGIN_SRC sh
+
+#+END_SRC
+* Install R from Source
+   1. [ ] Download Tarball of Latest R
+          http://cran.r-project.org/
+          ftp://ftp.stat.math.ethz.ch/Software/R/
+          http://cran.r-project.org/src/
+   2. [ ] Install Required Depencies
+   3. [ ] untar and configure
+
+   4. [ ] make and make install
+#+BEGIN_SRC sh :tangle ~/Dropbox/config/R/rInstall/rSource.deb.sh
+#!/bin/sh
+sudo apt-get build-dep r-base-core
+tar zxvf R-* .
+cd R* 
+# ./configure --prefix=/where/you/want/R/to/go (typically /usr/local or /opt/local) and can be set by
+# ./configure --prefix=/home/tian/Dropbox/soft/linux/R/$verR  <options>
+# --with-x=no and --enable-R-shlib if you just use rstudio  # no x need and shared/dynamic library libR.so
+# This will install to the following directories:
+# prefix/bin or bindir            # the front-end shell script and other scripts and executables
+# prefix/man/man1 or mandir/man1  # the man page
+# prefix/LIBnn/R or libdir/R      # all the rest (libraries, on-line help system, . . . ). 
+# Here LIBnn is usually ‘lib’, but may be ‘lib64’ on some 64-bit Linux systems. 
+# ./configure --prefix=/usr/local --with-x=no --enable-R-shlib --enable-prebuilt-html
+./configure --enable-R-shlib --prefix=/usr/local 
+make
+# make check
+# make info
+# make pdf
+# make tests
+sudo make install
+# sudo make install-pdf
+### ebooks, requires ebook-convert from Calibre (http: / / calibre-ebook . com / download)
+#make ebooks
+# make epub
+# make mobi
+# make install rhome=/usr/local/lib64/R-3.0.3
+# make prefix=/path/to/here install-libR   ##made R as a shared/dynamic library
+# make install-info
+# make install-pdf    ## PDF versions of the manuals
+# make install-tests  ## run-time tests that are part of make check-all 
+# ==============================================================================
+# 2 Symbolic Link or Set $PATH, link is more simple and convenient
+# path is better due to no new files created: PATH for R Rstudio ESS ESS help
+# ==============================================================================
+
+# sudo ln -sfv ~/Dropbox/soft/linux/R/${verR}/bin/R /usr/local/lib/R/library
+# sudo ln -sfv ~/Dropbox/soft/linux/R/${verR}/bin/R /usr/local/bin/R
+#sudo mkdir -p -- /usr/local/lib/R
+#sudo ln -sfv ~/Dropbox/soft/linux/R/${verR}/ /usr/local/bin/R
+#mkdir -p -- /usr/local/lib/R/doc/manual
+#sudo rm -vf  /usr/share/man/man1/R.1.gz
+# export PATH=${PATH}:/home/tian/Dropbox/soft/linux/R/R-3.0.3/bin
+# export RSTUDIO_WHICH_R=/home/tian/Dropbox/soft/linux/R/R-3.0.3/bin/R
+# ==============================================================================
+# 3 Check the install
+# ==============================================================================
+echo "which R is:" $(which R)
+echo "whereis R is:" $(whereis R)
+
+#+END_SRC
+* Install R on Deb :Debian Ubuntu, Mint and so on
+Download the script below from here [[file:config/R/rInstall.deb.sh][rInstall.deb.sh]]
+#+BEGIN_SRC sh :tangle ~/Dropbox/config/R/rInstall/rInstall.deb.sh
+# This file is automatically created by rIntall.org, Do not change here!!!
+#!/bin/sh
+sudo apt-get update & apt-get upgrade   ## Update the package list
+sudo apt-get build-dep -y r-base-core  ## Install the depencies
+sudo apt-get install -y r-base-core    ## Install r-base-core
+sudo apt-get install -y r-mathlib      ## Math
+sudo apt-get install -y ess            ## Emacs ess-mode
+sudo apt-get install -y r-doc-html
+sudo apt-get install -y r-doc-info
+sudo apt-get install -y r-doc-pdf
+echo "which R is:" $(which R)
+echo "where R is:" $(whereis R)
+#+END_SRC
+which R is: /usr/bin/R
+
+where R is: R: /usr/bin/R /etc/R /usr/lib/R /usr/bin/X11/R /usr/local/lib/R /usr/share/R /usr/share/man/man1/R.1.gz
+* Install Packages 
+[[http://cran.r-project.org/web/views/][CRAN Task Views]]
+|----------+------------------+-----------------+---+---|
+| Packages | Install          | Update          |   |   |
+|----------+------------------+-----------------+---+---|
+| base     | install.packages | update.packages |   |   |
+| ctv      | install.views    | update.views    |   |   |
+| devtools |                  |                 |   |   |
+|          |                  |                 |   |   |
+|----------+------------------+-----------------+---+---|
+#+BEGIN_SRC R :tangle ~/Dropbox/config/R/rInstall/ctvPkGs.R
+  # This file was automatically created by rInstall.org and Sourced by Rprofie
+  if(!require(ctv)){
+          install.packages("ctv")
+  } else {
+          install.views("Spatial")                    
+  }
+      
+#+END_SRC
+
+* update R and Installed packages
+* Remove R from Linux
+
+
