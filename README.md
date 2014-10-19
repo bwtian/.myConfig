@@ -1,4 +1,4 @@
 config
 ======
 
-Configure files for Linux PC
+Configure files for Linux Systems and softwares
